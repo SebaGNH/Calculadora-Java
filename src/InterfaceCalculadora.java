@@ -419,8 +419,13 @@ public class InterfaceCalculadora extends javax.swing.JFrame {
                 this.lblCasilla.setText(enteroSinCero(primerNumero * segundoNumero));
                 limpiarValores();
             }else if(operadores.equals("/")){
-                this.lblCasilla.setText(enteroSinCero(primerNumero / segundoNumero));
-                limpiarValores();
+                if (this.segundoNumero == 0) {
+                    this.lblCasilla.setText("0");
+                }else{
+                    this.lblCasilla.setText(enteroSinCero(primerNumero / segundoNumero));
+                    limpiarValores();
+                }
+                
             }
         }else{
             System.out.println("Operador limpio"+ operadores);
