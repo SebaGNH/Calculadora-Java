@@ -1,6 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+    11.21
  */
 
 /**
@@ -21,17 +20,26 @@ public class InterfaceCalculadora extends javax.swing.JFrame {
     public float segundoNumero = 0;
     public float operador;
     
-    public String primerValor;
-    public String segundoValor;
+    //public String primerValor;
+    //public String segundoValor;
     public String operadores="";
     
 
+    
+    public void limpiarValores(){
+    operadores = "";
+    primerNumero = 0;
+    segundoNumero = 0;
+    }
     public void ingresarValores(){
-        if (operadores.isEmpty()) {
-             primerNumero = Integer.parseInt(this.lblCasilla.getText());
-             this.lblCasilla.setText("");
+        
+        if (operadores.equals("")) {
+            //System.out.println("Ingresar valores "+ operadores);
+            //System.out.println(primerNumero);
+                primerNumero = Float.parseFloat(this.lblCasilla.getText());
+                this.lblCasilla.setText("");
         }else{
-            segundoNumero = Integer.parseInt(this.lblCasilla.getText());
+            segundoNumero = Float.parseFloat(this.lblCasilla.getText());
             this.lblCasilla.setText("");
             
         }   
@@ -351,29 +359,36 @@ public class InterfaceCalculadora extends javax.swing.JFrame {
 
     private void btn_sumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sumaActionPerformed
         // TODO add your handling code here:
-         //this.lblCasilla.setText(this.lblCasilla.getText()+"+");
-        
-        
-         ingresarValores();
-          operadores = "suma";
          
+        
+        //System.out.println(operadores);
+         ingresarValores();
+          operadores = "+";
+         //this.lblCasilla.setText(this.lblCasilla.getText()+"+");
          //operador;
          
     }//GEN-LAST:event_btn_sumaActionPerformed
 
     private void btn_restaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restaActionPerformed
         // TODO add your handling code here:
-         this.lblCasilla.setText(this.lblCasilla.getText()+"-");
+         //this.lblCasilla.setText(this.lblCasilla.getText()+"-");
+        ingresarValores();
+        operadores = "-";
+         
     }//GEN-LAST:event_btn_restaActionPerformed
 
     private void btn_multiplicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_multiplicaActionPerformed
         // TODO add your handling code here:
-         this.lblCasilla.setText(this.lblCasilla.getText()+"*");
+         //this.lblCasilla.setText(this.lblCasilla.getText()+"*");
+        ingresarValores();
+        operadores = "*";
     }//GEN-LAST:event_btn_multiplicaActionPerformed
 
     private void btn_divideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_divideActionPerformed
         // TODO add your handling code here:
-         this.lblCasilla.setText(this.lblCasilla.getText()+"/");
+         //this.lblCasilla.setText(this.lblCasilla.getText()+"/");
+        ingresarValores();
+        operadores = "/";
     }//GEN-LAST:event_btn_divideActionPerformed
 
     private void btn_limpiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiaActionPerformed
@@ -389,20 +404,31 @@ public class InterfaceCalculadora extends javax.swing.JFrame {
     private void btn_igualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_igualActionPerformed
         // TODO add your handling code here:
         
-        
-        
-        
+               
         ingresarValores();
-        System.out.println("1-  "+primerNumero);
-        System.out.println("2-  "+segundoNumero);
-        if (!operadores.isEmpty()) {
-            if (operadores.equals("suma")) {
+        //System.out.println("1-  "+primerNumero);
+        //System.out.println("2-  "+segundoNumero);
+        if (!operadores.equals("")) {
+            if (operadores.equals("+")) {
                 this.lblCasilla.setText(String.valueOf(primerNumero + segundoNumero));
-                operadores = "";
-                primerNumero = 0;
-                segundoNumero = 0;
+                //operadores = "";
+                //primerNumero = 0;
+                //segundoNumero = 0;
+                limpiarValores();
+            }else if(operadores.equals("-")){
+                this.lblCasilla.setText(String.valueOf(primerNumero - segundoNumero));
+                limpiarValores();
+            }else if(operadores.equals("*")){
+                this.lblCasilla.setText(String.valueOf(primerNumero * segundoNumero));
+                limpiarValores();
+            }else if(operadores.equals("/")){
+                this.lblCasilla.setText(String.valueOf(primerNumero / segundoNumero));
+                limpiarValores();
             }
+        }else{
+            System.out.println("Operador limpio"+ operadores);
         }
+        
         
     }//GEN-LAST:event_btn_igualActionPerformed
 
