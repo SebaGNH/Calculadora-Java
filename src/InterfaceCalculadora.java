@@ -17,11 +17,7 @@ public class InterfaceCalculadora extends javax.swing.JFrame {
     }
     
     public float primerNumero = 0;
-    public float segundoNumero = 0;
-    public float operador;
-    
-    //public String primerValor;
-    //public String segundoValor;
+    public float segundoNumero = 0;    
     public String operadores="";
     
 
@@ -31,21 +27,27 @@ public class InterfaceCalculadora extends javax.swing.JFrame {
     primerNumero = 0;
     segundoNumero = 0;
     }
-    public void ingresarValores(){
-        
+    
+    
+    public void ingresarValores(){        
         if (operadores.equals("")) {
-            //System.out.println("Ingresar valores "+ operadores);
-            //System.out.println(primerNumero);
                 primerNumero = Float.parseFloat(this.lblCasilla.getText());
                 this.lblCasilla.setText("");
+                
         }else{
             segundoNumero = Float.parseFloat(this.lblCasilla.getText());
             this.lblCasilla.setText("");
-            
-        }   
-        
-        
-        
+        }  
+    }
+    
+    
+    public String enteroSinCero(float resultado){
+    String retorno = "";
+    retorno = String.valueOf(resultado);
+        if (resultado % 1 == 0) {
+            retorno = retorno.substring(0, retorno.length() -2); // Quita los dos últimos caracteres
+        }
+    return retorno;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -361,17 +363,14 @@ public class InterfaceCalculadora extends javax.swing.JFrame {
         // TODO add your handling code here:
          
         
-        //System.out.println(operadores);
+        
          ingresarValores();
           operadores = "+";
-         //this.lblCasilla.setText(this.lblCasilla.getText()+"+");
-         //operador;
          
     }//GEN-LAST:event_btn_sumaActionPerformed
 
     private void btn_restaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restaActionPerformed
         // TODO add your handling code here:
-         //this.lblCasilla.setText(this.lblCasilla.getText()+"-");
         ingresarValores();
         operadores = "-";
          
@@ -379,14 +378,12 @@ public class InterfaceCalculadora extends javax.swing.JFrame {
 
     private void btn_multiplicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_multiplicaActionPerformed
         // TODO add your handling code here:
-         //this.lblCasilla.setText(this.lblCasilla.getText()+"*");
         ingresarValores();
         operadores = "*";
     }//GEN-LAST:event_btn_multiplicaActionPerformed
 
     private void btn_divideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_divideActionPerformed
         // TODO add your handling code here:
-         //this.lblCasilla.setText(this.lblCasilla.getText()+"/");
         ingresarValores();
         operadores = "/";
     }//GEN-LAST:event_btn_divideActionPerformed
@@ -398,7 +395,12 @@ public class InterfaceCalculadora extends javax.swing.JFrame {
 
     private void btn_puntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_puntoActionPerformed
         // TODO add your handling code here:
-         this.lblCasilla.setText(this.lblCasilla.getText()+".");
+         
+         
+         if (!this.lblCasilla.getText().contains(".")) {
+             this.lblCasilla.setText(this.lblCasilla.getText()+".");
+        }
+         
     }//GEN-LAST:event_btn_puntoActionPerformed
 
     private void btn_igualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_igualActionPerformed
@@ -406,23 +408,18 @@ public class InterfaceCalculadora extends javax.swing.JFrame {
         
                
         ingresarValores();
-        //System.out.println("1-  "+primerNumero);
-        //System.out.println("2-  "+segundoNumero);
         if (!operadores.equals("")) {
             if (operadores.equals("+")) {
-                this.lblCasilla.setText(String.valueOf(primerNumero + segundoNumero));
-                //operadores = "";
-                //primerNumero = 0;
-                //segundoNumero = 0;
+                this.lblCasilla.setText(enteroSinCero(primerNumero + segundoNumero));
                 limpiarValores();
             }else if(operadores.equals("-")){
-                this.lblCasilla.setText(String.valueOf(primerNumero - segundoNumero));
+                this.lblCasilla.setText(enteroSinCero(primerNumero - segundoNumero));
                 limpiarValores();
             }else if(operadores.equals("*")){
-                this.lblCasilla.setText(String.valueOf(primerNumero * segundoNumero));
+                this.lblCasilla.setText(enteroSinCero(primerNumero * segundoNumero));
                 limpiarValores();
             }else if(operadores.equals("/")){
-                this.lblCasilla.setText(String.valueOf(primerNumero / segundoNumero));
+                this.lblCasilla.setText(enteroSinCero(primerNumero / segundoNumero));
                 limpiarValores();
             }
         }else{
